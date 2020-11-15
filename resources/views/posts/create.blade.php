@@ -1,11 +1,9 @@
 @extends('layouts.app')
-@section('title')
-Add New FoodShare
-@endsection
+@section('title', 'Add New FoodShare')
 @section('content')
 {{-- <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}">
 </script> --}}
-<script
+{{-- <script
     src="https://cdn.tiny.cloud/1/uaseaa8scku1ckadx321408l4hwzqb4r0v2gob5ba1h75pkm/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
 <script type="text/javascript">
@@ -14,7 +12,7 @@ Add New FoodShare
     plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste"],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
   });
-</script>
+</script> --}}
 
 <form action="/new-post" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">

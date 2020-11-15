@@ -31,8 +31,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+                    data-toggle="collapse" data-target="#navbar-collapse-1">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -42,8 +41,7 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
-            <div class="collapse navbar-collapse"
-                id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="{{ url('/') }}">Home</a>
@@ -122,7 +120,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-10 col-md-offset-1 text-center">
                 <p>Copyright © 2020 | <span
                         class="badge badge-pill badge-light">BOEY</span> HGS</p>
             </div>
