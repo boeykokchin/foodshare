@@ -29,6 +29,7 @@ class PostFormRequest extends FormRequest
             'title' => 'required|unique:posts|max:255',
             'title' => array('Regex:/^[A-Za-z0-9 ]+$/'),
             'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gof,svg|max:2048',
         ];
     }
 }

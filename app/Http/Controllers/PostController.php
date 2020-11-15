@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PostFormRequest;
 
 use App\Models\Posts;
 use App\Models\Comments;
 use App\Models\User;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PostFormRequest;
 
 // note: use true and false for active posts in postgresql database
 // '0' and '1' are used here for active posts because of mysql database
@@ -63,6 +64,16 @@ class PostController extends Controller
         $duplicate = Posts::where('slug', $post->slug)->first();
         if ($duplicate) {
             return redirect('new-post')->withErrors('Title already exists.')->withInput();
+        }
+
+        if ($request->hasfile('image')) {
+            $file = request('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('posts/imgs', $filename);
+            $post->image = $filename;
+        } else {
+            $post->image = '';
         }
 
         $post->author_id = $request->user()->id;

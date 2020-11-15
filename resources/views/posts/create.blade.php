@@ -14,7 +14,8 @@
   });
 </script> --}}
 
-<form action="/new-post" method="post">
+<form action="{{ route('newPost') }}" method="post"
+    enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group">
         <input required="required" value="{{ old('title') }}"
@@ -24,9 +25,13 @@
     <div class="form-group">
         <textarea name='body' class="form-control">{{ old('body') }}</textarea>
     </div>
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="image">
+    </div>
     <input type="submit" name='publish' class="btn btn-success"
         value="Publish" />
     <input type="submit" name='save' class="btn btn-default"
         value="Save Draft" />
 </form>
+
 @endsection

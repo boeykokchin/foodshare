@@ -30,11 +30,11 @@ Route::middleware(['auth'])->group(function () {
     // show new post form
     Route::get('new-post', 'PostController@create');
     // save new post
-    Route::post('new-post', 'PostController@store');
+    Route::post('new-post', 'PostController@store')->name('newPost');
     // edit post form
     Route::get('edit/{slug}', 'PostController@edit');
     // update post
-    Route::post('update', 'PostController@update');
+    Route::post('update', 'PostController@update')->name('update');
     // delete post
     Route::get('delete/{id}', 'PostController@destroy');
     // display user's all posts
@@ -42,9 +42,9 @@ Route::middleware(['auth'])->group(function () {
     // display user's drafts
     Route::get('my-drafts', 'UserController@user_posts_draft');
     // add comment
-    Route::post('comment/add', 'CommentController@store');
+    Route::post('comment/add', 'CommentController@store')->name('addComment');
     // delete comment
-    Route::post('comment/delete/{id}', 'CommentController@distroy');
+    Route::post('comment/delete/{id}', 'CommentController@distroy')->name('deleteComment');
 });
 
 //users profile

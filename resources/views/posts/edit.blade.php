@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-Edit FoodShare
-@endsection
+@section('title', 'Edit FoodShare')
 @section('content')
 {{-- <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}">
 </script> --}}
@@ -16,7 +14,8 @@ Edit FoodShare
   });
 </script> --}}
 
-<form method="post" action='{{ url("/update") }}'>
+<form method="post" action='{{ route('update') }}'
+    enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="post_id"
         value="{{ $post->id }}{{ old('post_id') }}">
@@ -27,11 +26,14 @@ Edit FoodShare
     </div>
     <div class="form-group">
         <textarea name='body' class="form-control">
-      @if(!old('body'))
-      {!! $post->body !!}
-      @endif
-      {!! old('body') !!}
-    </textarea>
+            @if(!old('body'))
+            {!! $post->body !!}
+            @endif
+            {!! old('body') !!}
+        </textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="image">
     </div>
     @if($post->active == '1')
     <input type="submit" name='publish' class="btn btn-success"
