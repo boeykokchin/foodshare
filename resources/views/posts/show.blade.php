@@ -34,7 +34,7 @@ Page does not exist
 @if(Auth::guest())
 <p>Login to give us your thoughts</p>
 @else
-<div class="panel-body">
+<div class="card-body">
     <form method="post" action="/comment/add">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="on_post" value="{{ $post->id }}">
@@ -52,7 +52,7 @@ Page does not exist
     @if($comments)
     <ul style="list-style: none; padding: 0">
         @foreach($comments as $comment)
-        <li class="panel-body">
+        <li class="card-body">
             <div class="list-group">
                 <div class="list-group-item">
                     <h3>{{ $comment->author->name }}</h3>

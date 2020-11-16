@@ -15,16 +15,18 @@
             placeholder="Enter FoodShare description here (max. 500 chars)">{{ old('body') }}</textarea>
     </div>
     <div class="form-group">
-        <div class="custom-file">
+        {{-- <div class="custom-file">
             <input type="file" class="custom-file-input" id="customFile">
             <label class="custom-file-label" for="customFile">Choose
                 file</label>
-        </div>
-        {{-- <input type="file" class="form-control-file" name="image"> --}}
+        </div> --}}
+        <label for="imagefile">FoodShare Picture</label>
+        <input name="image" type="file" class="form-control-file"
+            id="imagefile">
     </div>
     <input type="submit" name='publish' class="btn btn-success"
         value="Publish" />
-    <input type="submit" name='save' class="btn btn-default"
+    <input type="submit" name='save' class="btn btn-secondary"
         value="Save Draft" />
 </form>
 

@@ -139,15 +139,15 @@
         </div>
     </div>
     <!-- Scripts -->
-    <script src="./coverage/bs-custom-file-input.js"></script>
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+    {{-- <script type="text/javascript"
+        src="{{ asset('js/bs-custom-file-input.js') }}">
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
                 bsCustomFileInput.init()
             });
-    </script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js">
-    </script>
+    </script> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous">

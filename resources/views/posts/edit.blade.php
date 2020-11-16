@@ -29,8 +29,11 @@
     </div>
     @endif
     <div class="form-group">
-        <input type="file" class="form-control-file" name="image"
+        <label for="imagefile">FoodShare Picture</label>
+        <input name="image" type="file" class="form-control-file" id="imagefile"
             value="{{ $post->image }}">
+        {{-- <input type="file" class="form-control-file" name="image"
+            value="{{ $post->image }}"> --}}
     </div>
     @if($post->active == '1')
     <input type="submit" name='publish' class="btn btn-success"
@@ -39,7 +42,7 @@
     <input type="submit" name='publish' class="btn btn-success"
         value="Publish" />
     @endif
-    <input type="submit" name='save' class="btn btn-default"
+    <input type="submit" name='save' class="btn btn-secondary"
         value="Save As Draft" />
     <a href="{{  url('delete/'.$post->id.'?_token='.csrf_token()) }}"
         class="btn btn-danger">Delete</a>
