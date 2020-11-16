@@ -66,7 +66,7 @@ class PostController extends Controller
             return redirect('new-post')->withErrors('Title already exists.')->withInput();
         }
 
-        if ($request->hasfile('image')) {
+        if ($request->hasFile('image')) {
             $file = request('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -147,8 +147,23 @@ class PostController extends Controller
                 }
             }
 
+
             $post->title = $title;
             $post->body = $request->input('body');
+
+            if ($flag = $request->hasFile('image')) {
+                $file = request('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('posts/imgs', $filename);
+                $post->image = $filename;
+            }
+            //  else {
+            //     // $post->image = "";
+            //     $post->image = $request->input('image');
+            // }
+            // dd($post);
+
 
             if ($request->has('save')) {
                 $post->active = 0;

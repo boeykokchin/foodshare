@@ -32,8 +32,15 @@
             {!! old('body') !!}
         </textarea>
     </div>
+    @if (!($post->image == ""))
     <div class="form-group">
-        <input type="file" class="form-control-file" name="image">
+        <img src="{{ asset('posts/imgs/'.$post->image) }}" alt="image"
+            height="150">
+    </div>
+    @endif
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="image"
+            value="{{ $post->image }}">
     </div>
     @if($post->active == '1')
     <input type="submit" name='publish' class="btn btn-success"

@@ -14,7 +14,7 @@ There is no FoodShare till now. Login and write a new FoodShare now!!!
                 @if($post->active == '1')
                 <button class="btn" style="float: right"><a
                         href="{{ url('edit/'.$post->slug)}}">Edit
-                        Post</a></button>
+                        FoodShare</a></button>
                 @else
                 <button class="btn" style="float: right"><a
                         href="{{ url('edit/'.$post->slug)}}">Edit
@@ -22,10 +22,19 @@ There is no FoodShare till now. Login and write a new FoodShare now!!!
                 @endif
                 @endif
             </h3>
-            <p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
+            {{-- <p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
+                href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
+            </p> --}}
+            <p>{{ $post->created_at->diffForHumans() }} By <a
                     href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
             </p>
         </div>
+        @if (!($flag = $post->image == ""))
+        <div class="list-group-item">
+            <img src="{{ asset('posts/imgs/'.$post->image) }}" alt="image"
+                height="150">
+        </div>
+        @endif
         <div class="list-group-item">
             <article>
                 {!! Str::limit($post->body, $limit = 1500, $end = '....... <a

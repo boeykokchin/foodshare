@@ -20,114 +20,133 @@
 
     <!-- Styles -->
     <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+        crossorigin="anonymous">
+    {{-- <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        crossorigin="anonymous"> --}}
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar-collapse-1">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+    <div id="app">
+
+        <nav class="navbar navbar-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ url('/') }}">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::guest())
+                        <li>
+                            <a href="{{ url('/auth/login') }}">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/auth/register') }}">Sign Up</a>
+                        </li>
+                        @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle"
+                                data-toggle="dropdown" role="button"
+                                aria-expanded="false">{{ Auth::user()->name }}
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                @if (Auth::user()->can_post())
+                                <li>
+                                    <a href="{{ url('/new-post') }}">Add new
+                                        FoodShare</a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="{{ url('/user/'.Auth::id().'/posts') }}">My
+                                        FoodShares</a>
+                                </li>
+                                @endif
+                                <li>
+                                    <a href="{{ url('/user/'.Auth::id()) }}">My
+                                        Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul class="nav navbar-nav">
+        </nav>
+        <div class="container">
+            @if (Session::has('message'))
+            <div class="flash alert-info">
+                <p class="panel-body">
+                    {{ Session::get('message') }}
+                </p>
+            </div>
+            @endif
+            @if ($errors->any())
+            <div class='flash alert-danger'>
+                <ul class="panel-body">
+                    @foreach ( $errors->all() as $error )
                     <li>
-                        <a href="{{ url('/') }}">Home</a>
+                        {{ $error }}
                     </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Auth::guest())
-                    <li>
-                        <a href="{{ url('/auth/login') }}">Login</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/auth/register') }}">Sign Up</a>
-                    </li>
-                    @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle"
-                            data-toggle="dropdown" role="button"
-                            aria-expanded="false">{{ Auth::user()->name }}
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            @if (Auth::user()->can_post())
-                            <li>
-                                <a href="{{ url('/new-post') }}">Add new
-                                    FoodShare</a>
-                            </li>
-                            <li>
-                                <a
-                                    href="{{ url('/user/'.Auth::id().'/posts') }}">My
-                                    FoodShares</a>
-                            </li>
-                            @endif
-                            <li>
-                                <a href="{{ url('/user/'.Auth::id()) }}">My
-                                    Profile</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/logout') }}">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @endif
+                    @endforeach
                 </ul>
             </div>
-        </div>
-    </nav>
-    <div class="container">
-        @if (Session::has('message'))
-        <div class="flash alert-info">
-            <p class="panel-body">
-                {{ Session::get('message') }}
-            </p>
-        </div>
-        @endif
-        @if ($errors->any())
-        <div class='flash alert-danger'>
-            <ul class="panel-body">
-                @foreach ( $errors->all() as $error )
-                <li>
-                    {{ $error }}
-                </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2>@yield('title')</h2>
-                        @yield('title-meta')
-                    </div>
-                    <div class="panel-body">
-                        @yield('content')
+            @endif
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2>@yield('title')</h2>
+                            @yield('title-meta')
+                        </div>
+                        <div class="panel-body">
+                            @yield('content')
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1 text-center">
-                <p>Copyright © 2020 | <span
-                        class="badge badge-pill badge-light">BOEY</span> HGS</p>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <p>Copyright © 2020 | <span><a href="#"
+                                class="badge badge-pill badge-success">BOEY</a>
+                            HGS
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous">
+    </script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous">
     </script>
@@ -135,7 +154,7 @@
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous">
-    </script>
+    </script> --}}
 </body>
 
 {{-- <body>

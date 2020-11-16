@@ -12,17 +12,24 @@ Page does not exist
 @endif
 @endsection
 @section('title-meta')
-<p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
+{{-- <p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
+    href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
+</p> --}}
+<p>{{ $post->created_at->diffForHumans() }} By <a
         href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
 </p>
 @endsection
 @section('content')
 @if($post)
 <div>
+    <div>
+        <img src="{{ asset('posts/imgs/'.$post->image) }}" alt="image"
+            height="150">
+    </div>
     {!! $post->body !!}
 </div>
 <div>
-    <h2>What are your thoughts?</h2>
+    <h3>What are your thoughts?</h3>
 </div>
 @if(Auth::guest())
 <p>Login to give us your thoughts</p>
