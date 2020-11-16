@@ -37,7 +37,7 @@ There is no FoodShare till now. Login and write a new FoodShare now!!!
         @endif
         <div class="list-group-item">
             <article>
-                {!! Str::limit($post->body, $limit = 1500, $end = '....... <a
+                {!! Str::limit($post->body, $limit = 250, $end = '....... <a
                     href='.url("/".$post->slug).'>Read More</a>') !!}
             </article>
         </div>

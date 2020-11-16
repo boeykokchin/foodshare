@@ -1,18 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Edit FoodShare')
 @section('content')
-{{-- <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}">
-</script> --}}
-{{-- <script
-    src="https://cdn.tiny.cloud/1/uaseaa8scku1ckadx321408l4hwzqb4r0v2gob5ba1h75pkm/tinymce/5/tinymce.min.js"
-    referrerpolicy="origin"></script>
-<script type="text/javascript">
-    tinymce.init({
-    selector: "textarea",
-    plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste"],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-  });
-</script> --}}
 
 <form method="post" action='{{ route('update') }}'
     enctype="multipart/form-data">
@@ -20,12 +8,14 @@
     <input type="hidden" name="post_id"
         value="{{ $post->id }}{{ old('post_id') }}">
     <div class="form-group">
-        <input required="required" placeholder="Enter title here" type="text"
-            name="title" class="form-control"
+        <input required="required"
+            placeholder="Enter FoodShare title here (max. 50 chars)" type="text"
+            maxlength="50" name="title" class="form-control"
             value="@if(!old('title')){{$post->title}}@endif{{ old('title') }}" />
     </div>
     <div class="form-group">
-        <textarea name='body' class="form-control">
+        <textarea name='body' class="form-control" maxlength="500"
+            placeholder="Enter FoodShare description here (max. 500 chars)">
             @if(!old('body'))
             {!! $post->body !!}
             @endif
